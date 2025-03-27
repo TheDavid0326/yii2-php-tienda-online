@@ -10,6 +10,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@uploads' => '@app/uploads',
     ],
     'components' => [
         'request' => [
@@ -37,7 +38,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'info', 'trace'],
                 ],
             ],
         ],
