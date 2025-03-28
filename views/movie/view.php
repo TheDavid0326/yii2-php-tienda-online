@@ -33,7 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description:ntext',
             'price',
-            'image',
+            [
+                'attribute' => 'image',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::img($model->image, ['width' => '200']);
+                }
+            ],
             'release_date',
             'duration',
         ],

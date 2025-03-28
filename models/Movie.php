@@ -41,7 +41,8 @@ class Movie extends \yii\db\ActiveRecord
     {
         return [
             [['description', 'release_date', 'duration'], 'default', 'value' => null],
-            [['title', 'price', 'fileImage'], 'required'],
+            [['title', 'price'], 'required'],
+            [['fileImage'], 'required', 'on' => 'create'], // Solo requerido en create
             [['description'], 'string'],
             [['price'], 'number'],
             [['release_date'], 'safe'],

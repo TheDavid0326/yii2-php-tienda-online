@@ -18,6 +18,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
+    <?= Html::img($model->image, [
+        'width' => '200px',
+        'class' => 'img-thumbnail',
+        'style' => 'margin-bottom: 20px; border-radius: 20px'
+    ]) ?>
+
     <?= $form->field($model, 'fileImage')->fileInput(['class' => 'form-control'])->label('Image') ?>
 
     <?= $form->field($model, 'release_date')->textInput() ?>

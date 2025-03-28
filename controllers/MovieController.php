@@ -73,12 +73,7 @@ class MovieController extends Controller
         $model = new Movie();
 
         if ($this->request->isPost && $model->load($this->request->post())) {
-            Yii::debug('Ha entrado al POST');
             $model->fileImage = UploadedFile::getInstance($model, 'fileImage');
-
-
-            // Yii::debug('Datos recibidos: ' . json_encode($model->attributes)); // Verifica si los datos llegan
-            // Yii::debug('Archivo recibido: ' . json_encode($model->fileImage, JSON_PRETTY_PRINT), 'application');
 
             if (!$model->fileImage) {
                 Yii::$app->session->setFlash('error', 'No file received.');
@@ -86,20 +81,7 @@ class MovieController extends Controller
                 return;
             }
 
-            // if (isset($_FILES['Movie']['name']['image']) && $_FILES['Movie']['name']['image'] != '') {
-            //     Yii::debug('Imagen subida: ' . $_FILES['Movie']['name']['image']);
-            //     Yii::debug('Imagen cargada:', ['image' => $model->image]);
-            // } else {
-            //     Yii::debug('No se ha subido ninguna imagen.');
-            // }
-
-            // if ($model->validate()) {
-            //     Yii::debug('Datos validados correctamente');
-            // } else {
-            //     // Mostrar los errores que no pasaron la validación
-            //     Yii::debug('Errores de validación: ' . json_encode($model->errors));
-            // }
-        //
+     
             if ($model->validate()) {
                 Yii::debug('Datos validados correctamente');
                 $this->uploadImage($model);
@@ -112,13 +94,9 @@ class MovieController extends Controller
 
             }
             
-            // if ($model->load($this->request->post()) && $model->save()) {
-            //     return $this->redirect(['view', 'id' => $model->id]);
-            // }
+           
         } 
-        // else {
-        //     $model->loadDefaultValues();
-        // }
+       
 
         return $this->render('create', [
             'model' => $model,
@@ -136,10 +114,37 @@ class MovieController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->fileImage = UploadedFile::getInstance($model, 'fileImage');
 
+            if ($model->validate()) {
+                Yii::debug('Datos validados correctamente');
+
+                // Si se ha cargado una nueva imagen
+                if ($model->fileImage ) {
+                    
+                    // Eliminar la imagen anterior
+                    $filePath = Yii::getAlias('@webroot/') . $model->image;
+                    if (file_exists($filePath)){
+                        unlink($filePath);
+                    }
+                
+                    // Subir la nueva imagen
+                    $this->uploadImage($model);
+                }
+    
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
+
+            } else {
+                // Mostrar los errores que no pasaron la validación
+                Yii::debug('Errores de validación: ' . json_encode($model->errors));
+            }
+
+        }
+        
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -153,8 +158,17 @@ class MovieController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    {   
+        $model = $this->findModel($id);
+
+        if ($model->image) {
+            $filePath = Yii::getAlias('@webroot/') . $model->image;
+            if (file_exists($filePath)){
+                unlink($filePath);
+            }
+        }
+        
+        $model->delete();
 
         return $this->redirect(['index']);
     }
