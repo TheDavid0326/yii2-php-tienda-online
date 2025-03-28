@@ -47,9 +47,7 @@ class Movie extends \yii\db\ActiveRecord
             [['release_date'], 'safe'],
             [['duration'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            // [['image'], 'string', 'max' => 2500],
-            [['fileImage'], 'file', 'extensions' => 'jpg, jpeg, png', 'checkExtensionByMimeType' => false],
-            // [['fileImage'], 'safe'],
+            [['fileImage'], 'file', 'extensions' => 'jpg, jpeg, png'],
         ];
     }
 

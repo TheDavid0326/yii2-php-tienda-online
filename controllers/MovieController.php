@@ -93,12 +93,12 @@ class MovieController extends Controller
             //     Yii::debug('No se ha subido ninguna imagen.');
             // }
 
-            if ($model->validate()) {
-                Yii::debug('Datos validados correctamente');
-            } else {
-                // Mostrar los errores que no pasaron la validación
-                Yii::debug('Errores de validación: ' . json_encode($model->errors));
-            }
+            // if ($model->validate()) {
+            //     Yii::debug('Datos validados correctamente');
+            // } else {
+            //     // Mostrar los errores que no pasaron la validación
+            //     Yii::debug('Errores de validación: ' . json_encode($model->errors));
+            // }
         //
             if ($model->validate()) {
                 Yii::debug('Datos validados correctamente');
