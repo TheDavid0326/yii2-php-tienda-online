@@ -40,9 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img((Yii::getAlias('@web/') . $model->image), ['alt' => $model->title, 'style' => 'width: 100px;']);
                 }
             ],
-            // 'image',
             'release_date',
             'duration',
+            [
+                'attribute'=>'Añadir al carrito',
+                'format'=>'html',
+                'value'=>function($model) {
+                    return Html::a('Añadir al carrito', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                } // Le pasamos el id de la película a CartController, desde ahí lo recibimos con actionAdd($id)
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Movie $model, $key, $index, $column) {

@@ -15,7 +15,9 @@ use Yii;
  */
 class Userdb extends \yii\db\ActiveRecord
 {
-
+    public function getCarts() {
+        return $this->hasMany(Cart::class, ['user_id'=> 'id']);
+    }
 
     /**
      * {@inheritdoc}

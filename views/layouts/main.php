@@ -43,6 +43,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Movies', 'url' => ['/movie/index']],
             ['label' => 'UserDB', 'url' => ['/userdb/index']],
+            ['label' => 'Cart', 'url' => ['/cart/index']],
+            ['label' => 'Cart-item', 'url' => ['/cart-item/index']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
