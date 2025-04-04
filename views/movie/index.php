@@ -21,7 +21,26 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Movie', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php
+    // Definimos SerReturnUrl para que el usuario vuelva después de login, en login tenemos goBack()
+    Yii::$app->user->setReturnUrl(Yii::$app->request->url);
+
+    // Si el usuario no está logueado, mostramos un botón de login, si está logueado, mostramos el botón de añadir al carrito
+    $cartButton = Yii::$app->user->isGuest 
+    ? [
+        'attribute' => 'Añadir al carrito',
+        'format' => 'html',
+        'value' => function($model) {
+            return Html::a('Inicia sesión para añadir al carrito', ['/site/login', 'return_url' => Yii::$app->request->url], ['class' => 'btn btn-secondary']);
+        }
+    ]
+    : [
+        'attribute' => 'Añadir al carrito',
+        'format' => 'html',
+        'value' => function($model) {
+            return Html::a('Añadir al carrito', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        }
+    ]; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -42,13 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'release_date',
             'duration',
-            [
-                'attribute'=>'Añadir al carrito',
-                'format'=>'html',
-                'value'=>function($model) {
-                    return Html::a('Añadir al carrito', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-primary']);
-                } // Le pasamos el id de la película a CartController, desde ahí lo recibimos con actionAdd($id)
-            ],
+            $cartButton,
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Movie $model, $key, $index, $column) {

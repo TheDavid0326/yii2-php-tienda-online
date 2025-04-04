@@ -138,7 +138,7 @@ class CartController extends Controller
             $movie = Movie::findOne($id);
             
             if (!$movie) {
-                throw new NotFoundHttpException('The requested movie does not exists');
+                throw new NotFoundHttpException('No se encontró la película');
             }
             // Buscamos si el usuario tiene un carrito activo
             $cart = Cart::find()->where(['status' => 'active', 'user_id'=> Yii::$app->user->id])->one();
@@ -147,7 +147,7 @@ class CartController extends Controller
                 $cart->user_id = Yii::$app->user->id;
                 
                 if(!$cart->save()) {
-                    Yii::$app->session->setFlash('error', 'Failed to create cart');
+                    Yii::$app->session->setFlash('error', 'Se ha producido un error al crear el carrito');
                     return $this->redirect(['site/index']);
                 }
             }
@@ -156,7 +156,8 @@ class CartController extends Controller
             $item = CartItem::findOne(['cart_id' => $cart->id, 'movie_id' => $movie->id]);
 
             if ($item) {
-                Yii::$app->session->setFlash('error', 'Movie already in cart');
+                Yii::$app->session->setFlash('error', 'La película ya está en el carrito');
+                return $this->redirect(Yii::$app->request->referrer);
             }
 
             $item = new CartItem([
@@ -166,17 +167,33 @@ class CartController extends Controller
             ]);
 
             if (!$item->save()) {
-                Yii::$app->session->setFlash('error', 'Failed to add movie to cart in save');
+                Yii::$app->session->setFlash('error', 'No se pudo añadir la película al carrito');
+                return $this->redirect(Yii::$app->request->referrer);
             }
             $transaction->commit();
-            Yii::$app->session->setFlash('success', 'Movie added to cart successfully');
+            Yii::$app->session->setFlash('success', 'Película añadida al carrito correctamente');
 
-            return $this->redirect(['cart/index']);
+            return $this->redirect(Yii::$app->request->referrer);
 
 
         } catch (\Exception $e) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('error', 'An error ocurred while adding the movie to the cart', $e->getMessage());        }
+    }
+
+    public function actionMyCart(){
+        $cart = Cart::find()
+        ->where(['user_id' => Yii::$app->user->id, 'status' => 'active'])
+        ->with('cartItems')
+        ->one();
+
+        if (!$cart) {
+            $cart = new Cart([
+                'user_id' => Yii::$app->user->id
+            ]);
+        }
+
+        return $this->render('my-cart', ['cart' => $cart]);
     }
     
     protected function findModel($id)
@@ -187,4 +204,5 @@ class CartController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

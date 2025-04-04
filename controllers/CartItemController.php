@@ -4,9 +4,12 @@ namespace app\controllers;
 
 use app\models\CartItem;
 use app\models\CartItemSearch;
+use app\models\Movie;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use Yii;
 
 /**
  * CartItemController implements the CRUD actions for CartItem model.
@@ -113,7 +116,7 @@ class CartItemController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->referrer); // Referrer: Desde qué URL vino esta petición
     }
 
     /**
@@ -123,6 +126,12 @@ class CartItemController extends Controller
      * @return CartItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    
+     public function getMovie()
+     {
+         return $this->hasOne(Movie::class, ['id' => 'movie_id']);
+     }
+    
     protected function findModel($id)
     {
         if (($model = CartItem::findOne(['id' => $id])) !== null) {
