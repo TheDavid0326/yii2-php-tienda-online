@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Userdb;
-use app\models\UserdbSearch;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserdbController implements the CRUD actions for Userdb model.
+ * UserController implements the CRUD actions for User model.
  */
-class UserdbController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class UserdbController extends Controller
     }
 
     /**
-     * Lists all Userdb models.
+     * Lists all User models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UserdbSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class UserdbController extends Controller
     }
 
     /**
-     * Displays a single Userdb model.
+     * Displays a single User model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class UserdbController extends Controller
     }
 
     /**
-     * Creates a new Userdb model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Userdb();
+        $model = new User();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class UserdbController extends Controller
     }
 
     /**
-     * Updates an existing Userdb model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class UserdbController extends Controller
     }
 
     /**
-     * Deletes an existing Userdb model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class UserdbController extends Controller
     }
 
     /**
-     * Finds the Userdb model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Userdb the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Userdb::findOne(['id' => $id])) !== null) {
+        if (($model = User::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

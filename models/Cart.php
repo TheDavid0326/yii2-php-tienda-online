@@ -47,7 +47,7 @@ class Cart extends \yii\db\ActiveRecord
             [['status'], 'string'],
             ['status', 'in', 'range' => array_keys(self::optsStatus())],
             [['user_id', 'status'], 'unique', 'targetAttribute' => ['user_id', 'status']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Userdb::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -91,7 +91,7 @@ class Cart extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Userdb::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
 

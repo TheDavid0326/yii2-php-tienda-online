@@ -1,24 +1,29 @@
 <?php
 
-use app\models\Userdb;
+use app\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\UserdbSearch $searchModel */
+/** @var app\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'UserDBs';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
+
+echo Yii::$app->user->identity->username;  // Debe mostrar "David0326"
+echo Yii::$app->user->identity->id;        // Debe mostrar "1"
 ?>
-<div class="userdb-index">
+
+
+<div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Userdb', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -36,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'access_token',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Userdb $model, $key, $index, $column) {
+                'urlCreator' => function ($action, User $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

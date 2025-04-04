@@ -6,7 +6,7 @@ use app\models\Cart;
 use app\models\CartItem;
 use app\models\CartSearch;
 use app\models\Movie;
-use app\models\Userdb;
+use app\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -135,16 +135,12 @@ class CartController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
 
         try {
-            
-            $user = Userdb::findOne(Yii::$app->user->identity->username);
-            
-            
             $movie = Movie::findOne($id);
             
             if (!$movie) {
                 throw new NotFoundHttpException('The requested movie does not exists');
             }
-
+            // Buscamos si el usuario tiene un carrito activo
             $cart = Cart::find()->where(['status' => 'active', 'user_id'=> Yii::$app->user->id])->one();
             if (!$cart) {
                 $cart = new Cart();
