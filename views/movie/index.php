@@ -6,6 +6,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
+use yii\data\ActiveDataProvider;
+
 /** @var yii\web\View $this */
 /** @var app\models\MovieSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -41,10 +43,24 @@ $this->params['breadcrumbs'][] = $this->title;
             return Html::a('Añadir al carrito', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-primary']);
         }
     ]; ?>
+    <?php 
+    $dataProvider = new ActiveDataProvider([
+        'query' => Movie::find(),
+        'pagination' => [
+            'pageSize' => 10, // Aquí es donde va la paginación
+        ],
+    ]);
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'options' => ['class' => 'pagination justify-content-center'],
+            'linkContainerOptions' => ['class' => 'page-item mx-1'],
+            'linkOptions' => ['class' => 'page-link'],
+            'disabledListItemSubTagOptions' => ['class' => 'page-link', 'tag' => 'a']
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

@@ -37,7 +37,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav ms-auto'],
         'items' => [
             // ['label' => 'Home', 'url' => ['/site/index']],
             // ['label' => 'About', 'url' => ['/site/about']],
