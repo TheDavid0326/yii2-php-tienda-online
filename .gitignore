@@ -36,3 +36,5 @@ tests/_support/_generated
 /web/assets
 
 /db/backup_manual
+
+/config/params.php
