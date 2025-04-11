@@ -43,14 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
             return Html::a('Añadir al carrito', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-primary']);
         }
     ]; ?>
-    <?php 
-    $dataProvider = new ActiveDataProvider([
-        'query' => Movie::find(),
-        'pagination' => [
-            'pageSize' => 10, // Aquí es donde va la paginación
-        ],
-    ]);
-    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

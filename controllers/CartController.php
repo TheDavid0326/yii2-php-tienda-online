@@ -121,6 +121,22 @@ class CartController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionDeleteAll() {
+
+        $cart = Cart::find()->where([
+            'user_id' => Yii::$app->user->id,
+            'status' => 'active'
+        ])->one();
+
+        if ($cart) {
+            // Borra todos los items del carrito
+            CartItem::deleteAll(['cart_id' => $cart->id]);
+        }
+
+        Yii::$app->session->set('cart_count', count($cart->cartItems));
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Finds the Cart model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -172,6 +188,8 @@ class CartController extends Controller
             }
             $transaction->commit();
             Yii::$app->session->setFlash('success', 'Película añadida al carrito correctamente');
+
+            Yii::$app->session->set('cart_count', count($cart->cartItems));
 
             return $this->redirect(Yii::$app->request->referrer);
 

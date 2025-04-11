@@ -86,3 +86,10 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+.card-img-css {
+    height: 600px; /* Ajusta la altura fija */
+    object-fit: cover; /* Hace que la imagen se recorte sin distorsión */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

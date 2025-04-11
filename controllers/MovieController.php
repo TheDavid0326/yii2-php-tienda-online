@@ -50,6 +50,17 @@ class MovieController extends Controller
         ]);
     }
 
+    public function actionGallery() {
+        
+        $searchModel = new MovieSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('gallery', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Movie model.
      * @param int $id ID

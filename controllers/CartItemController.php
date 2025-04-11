@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Cart;
 use app\models\CartItem;
 use app\models\CartItemSearch;
 use app\models\Movie;
@@ -116,6 +117,13 @@ class CartItemController extends Controller
     {
         $this->findModel($id)->delete();
 
+        $cart = Cart::find()->where([
+            'user_id' => Yii::$app->user->id,
+            'status' => 'active'
+        ])->one();
+
+        Yii::$app->session->set('cart_count', count($cart->cartItems));
+
         return $this->redirect(Yii::$app->request->referrer); // Referrer: Desde qué URL vino esta petición
     }
 
@@ -130,6 +138,11 @@ class CartItemController extends Controller
      public function getMovie()
      {
          return $this->hasOne(Movie::class, ['id' => 'movie_id']);
+     }
+
+     public function getCart()
+     {
+         return $this->hasOne(Cart::class, ['id' => 'cart_id']);
      }
     
     protected function findModel($id)

@@ -64,13 +64,19 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-confirm' => sprintf('¿Estás seguro de que deseas eliminar este producto "%s" del carrito?', $model->movie->title)
                         ]);
                     }
-                ]
+                ],
+                'footer' => Html::a('Vaciar carrito', Url::to(['cart/delete-all']), [
+                    'class' => 'btn btn-danger',
+                    'data-method' => 'post',
+                    'data-confirm' => '¿Estás seguro de que deseas vaciar tu carrito?'
+                ])
+            ]
         ]
-    ]])
+    ]);
     ?>
 
     <?php if (!empty($cart->cartItems)): ?>
-        <div class="text-end mt-4">
+        <div class="text-end mt-3">
             <?= Html::a('Comprar', ['cart/buy'], [
                 'class' => 'btn btn-success btn-lg',
                 'data-method' => 'post',

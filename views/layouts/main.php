@@ -23,6 +23,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -42,9 +44,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             // ['label' => 'Home', 'url' => ['/site/index']],
             // ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Movies', 'url' => ['/movie/index']],
+            ['label' => 'Galería', 'url' => ['/movie/gallery']],
             ['label' => 'User', 'url' => ['/user/index']],
             ['label' => 'Cart', 'url' => ['/cart/index']],
-            ['label' => 'Mi carrito', 'url' => ['/cart/my-cart']],
+            ['label' => 'Mi carrito (' . Yii::$app->session->get('cart_count', 0) .')', 'url' => ['/cart/my-cart']],
             ['label' => 'Cart-item', 'url' => ['/cart-item/index']],
             // ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
