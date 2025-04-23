@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if (!empty($cart->cartItems)): ?>
         <div class="text-end mt-3">
-            <?= Html::a('Comprar', ['cart/buy'], [
+            <?= Html::a('Comprar', ['cart/checkout'], [
                 'class' => 'btn btn-success btn-lg',
                 'data-method' => 'post',
                 'data-confirm' => '¿Estás seguro de que deseas comprar estos productos?'
