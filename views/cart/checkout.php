@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="<?php echo Yii::getAlias('@web/css/checkout.css') ?>" />
     <script src="<?= Yii::getAlias('@web/js/checkout.js') ?>" defer></script> <!-- defer: el script se descarga en paralelo pero se ejecuta al final, después de que el DOM esté listo. -->
-    <script src="https://js.stripe.com/v3" defer></script>
+    <script src="https://js.stripe.com/basil/stripe.js" defer></script>
 
-    <!-- Inicializamos clientSecret en JavaScript para poder usarlo desde el navegador, es decir en el frontend con un archivo JavaScript o un script -->
+    <!-- Inicializamos clientSecret y returnUrl en JavaScript para poder usarlo desde el navegador, es decir en el frontend con un archivo JavaScript o un script -->
     <script>
       const clientSecret = "<?= $clientSecret ?>";
+      const totalAmount = <?= json_encode((float)$totalAmount) ?>;
+      const returnUrl = "<?= $returnUrl ?>";
     </script>
   </head>
 

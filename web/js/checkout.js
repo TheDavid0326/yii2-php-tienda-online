@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
   
   const stripe = Stripe('pk_test_51RCOdg4UiTf8rdcB1ikPCWvHOXJBpGAzj4X9BdGLCDzMKRsyjNPRTHxABNk9y7ebK6ZPjT5hcSimYYnB6CoNuiAy00KQyiEu8n');
@@ -19,13 +17,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Montarlo en el contenedor con id 'payment-element'
   paymentElement.mount("#payment-element");
-});
 
-// Obtener el formulario y añadir el evento de submit
+  // Obtener el formulario y añadir el evento de submit
 const form = document.getElementById("payment-form");
 
-// initialize();
-let checkout;
+let checkout = {
+  updateEmail: (email) => {
+      return { type: "success" }; // Simulación de respuesta
+  }
+};
+
+initialize();
+
 
 // Función para validar el email
 const validateEmail = async (email) => {
@@ -42,8 +45,9 @@ document
 async function initialize() {
 
   document.querySelector("#button-text").textContent = `Pay ${
-    checkout.session().total.total.amount
-  } now`;
+    totalAmount
+  }€ now`;
+  
   const emailInput = document.getElementById("email");
   const emailErrors = document.getElementById("email-errors");
 
@@ -63,6 +67,13 @@ async function initialize() {
       emailErrors.textContent = message;
     }
   });
+
+  const { error } = await stripe.confirmPayment({
+    elements,
+    confirmParams: {
+      return_url: returnUrl,
+    },
+  });
 }
 
 async function handleSubmit(e) {
@@ -71,13 +82,24 @@ async function handleSubmit(e) {
 
   const email = document.getElementById("email").value;
   const { isValid, message } = await validateEmail(email);
+
+  // Guarda el email en el almacenamiento local para luego usarlo en success.js
+  sessionStorage.setItem("checkoutEmail", email);
+
   if (!isValid) {
     showMessage(message);
     setLoading(false);
     return;
   }
 
-  const { error } = await checkout.confirm();
+  
+    // Confirma el pago con el 'PaymentIntent' y el 'clientSecret'
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: returnUrl, // Esta es la URL de retorno después de la confirmación del pago
+      },
+    });
 
   // This point will only be reached if there is an immediate error when
   // confirming the payment. Otherwise, your customer will be redirected to
@@ -116,3 +138,6 @@ function setLoading(isLoading) {
     document.querySelector("#button-text").classList.remove("hidden");
   }
 }
+  
+});
+

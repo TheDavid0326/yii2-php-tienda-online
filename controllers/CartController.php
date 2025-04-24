@@ -10,6 +10,7 @@ use app\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 use Yii;
 
@@ -215,6 +216,9 @@ class CartController extends Controller
     }
 
     public function actionCheckout() {
+        // Establecer la URL de retorno
+        $returnUrl = Url::to(['cart/success'], true);
+        
         // Obtener el carrito activo del usuario
         $cart = Cart::find()->where([
             'user_id' => Yii::$app->user->id,
@@ -250,7 +254,22 @@ class CartController extends Controller
             'cart' => $cart,
             'totalAmount' => $totalAmount,
             'clientSecret' => $clientSecret,
+            'returnUrl' => $returnUrl
         ]);
+    }
+
+    public function actionSuccess() {
+        $cart = Cart::find()->where([
+            'user_id' => Yii::$app->user->id,
+            'status' => 'active'
+        ])->one();
+
+        if (!$cart) {
+            Yii::$app->session->setFlash('error', 'No hay carrito activo.');
+            return $this->redirect(['site/index']);
+        }
+
+        return $this->render('success', ['cart' => $cart]);
     }
 
     protected function findModel($id)
