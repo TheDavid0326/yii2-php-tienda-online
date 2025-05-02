@@ -53,31 +53,38 @@ Plataforma completa de venta de películas con panel de administración, carrito
    yii migrate
    ```
 ## Estructura del proyecto
-config/         # Archivos de configuración de Yii2
-controllers/    # Controladores de la aplicación
-  CartController.php   # Lógica del carrito
-  MovieController.php  # Gestión de películas
-  UserController.php   # Manejo de usuarios
-migrations/     # Migraciones de base de datos
-models/         # Modelos de la aplicación
-views/          # Plantillas de vistas
-  layouts/      
-    admin.php   # Layout para el panel de administración
-    main.php    # Layout para el frontend
-web/            # Assets accesibles públicamente
-  dist/         # Assets compilados de AdminLTE
+.
+├── config/ # Archivos de configuración de Yii2
+├── controllers/ # Controladores de la aplicación
+│ ├── CartController.php # Lógica del carrito
+│ ├── MovieController.php # Gestión de películas
+│ └── UserController.php # Manejo de usuarios
+├── migrations/ # Migraciones de base de datos
+├── models/ # Modelos de la aplicación
+├── views/ # Plantillas de vistas
+│ └── layouts/
+│ ├── admin.php # Layout para el panel de administración
+│ └── main.php # Layout para el frontend
+└── web/ # Assets accesibles públicamente
+└── dist/ # Assets compilados de AdminLTE
 
-## Componentes principales
+## 🔧 Componentes principales
 
-### Carrito
-#### Modelos: Cart, CartItem
-#### Funcionalidades:
-Carritos persistentes para usuarios registrados
-Actualización en tiempo real
-Proceso de pago seguro
+### 🛒 Carrito
 
-### Integración con Stripe
-``` php
+**Modelos:** `Cart`, `CartItem`
+
+**Funcionalidades:**
+
+- Carritos persistentes para usuarios registrados
+- Actualización de cantidad y contenido en tiempo real
+- Proceso de pago seguro con Stripe
+
+---
+
+### 💳 Integración con Stripe
+
+```php
 public function actionCheckout()
 {
     $stripe = new \Stripe\StripeClient(Yii::$app->params['stripeSecretKey']);
@@ -89,9 +96,10 @@ public function actionCheckout()
 }
 ```
 
-### Panel de Administración
-Desarrollado con AdminLTE 4
+### 🧑‍💼 Panel de Administración
 
-Diseño responsive
+- Desarrollado con **AdminLTE 4**
+- Diseño responsive
+- Control de acceso basado en roles (RBAC)
 
-Control de acceso basado en roles (RBAC)
+  
