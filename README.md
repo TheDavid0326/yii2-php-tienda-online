@@ -1,7 +1,5 @@
 # Plataforma de E-commerce de Películas con Yii2
 
-![Vista previa del panel AdminLTE](https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png)
-
 Plataforma completa de venta de películas con panel de administración, carrito de compras e integración con Stripe.
 
 <h1 align="center">Página de Inicio</h1>
