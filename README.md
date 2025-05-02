@@ -4,6 +4,12 @@
 
 Plataforma completa de venta de películas con panel de administración, carrito de compras e integración con Stripe.
 
+<h1 align="center">Página de Inicio</h1>
+<p align="center">
+    <img src="https://i.imgur.com/UqCgem1.png" height="400px">
+    <br>
+</p>
+
 ## Características principales
 
 - 🎬 **Catálogo de películas**
