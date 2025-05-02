@@ -5,6 +5,7 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
+use yii\helpers\Url;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
@@ -41,15 +42,32 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav ms-auto'],
-        'items' => [
-            // ['label' => 'Home', 'url' => ['/site/index']],
-            // ['label' => 'About', 'url' => ['/site/about']],
+        'items' => array_merge(
+            !Yii::$app->user->isGuest && Yii::$app->user->identity->username === 'admin'
+        ? [ // Navbar for admin
+            ['label' => 'Personalizar Dashboard', 
+            'url' => Url::to(Yii::getAlias('@web/dist/pages/index.html')), 
+            'linkOptions' => ['target' => '_blank', 'rel' => 'noopener']],
             ['label' => 'Movies', 'url' => ['/movie/index']],
-            ['label' => 'Galería', 'url' => ['/movie/gallery']],
             ['label' => 'User', 'url' => ['/user/index']],
             ['label' => 'Cart', 'url' => ['/cart/index']],
-            ['label' => 'Mi carrito (' . Yii::$app->session->get('cart_count', 0) .')', 'url' => ['/cart/my-cart']],
             ['label' => 'Cart-item', 'url' => ['/cart-item/index']],
+            Yii::$app->user->isGuest
+                ? ['label' => 'Login', 'url' => ['/site/login']]
+                : '<li class="nav-item">'
+                    . Html::beginForm(['/site/logout'])
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'nav-link btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'   
+        ] 
+        : [ // Navbar for user
+            // ['label' => 'Home', 'url' => ['/site/index']],
+            // ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Galería', 'url' => ['/movie/gallery']],
+            ['label' => 'Mi carrito (' . Yii::$app->session->get('cart_count', 0) .')', 'url' => ['/cart/my-cart']],
             // ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
@@ -60,8 +78,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
-                    . '</li>'
+                    . '</li>'                    
         ]
+    ),
     ]);
     NavBar::end();
     ?>

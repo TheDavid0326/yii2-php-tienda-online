@@ -13,15 +13,14 @@ use yii\grid\GridView;
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Yii::$app->user->identity->username;  // Debe mostrar "David0326"
-echo Yii::$app->user->identity->id;        // Debe mostrar "1"
 ?>
 
 
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1 class="text-center mb-3 fw-bold text-primary"> <?= Html::encode($this->title)?></h1>
+    <hr class="border border-primary border-3 opacity-75">
+    
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -31,9 +30,8 @@ echo Yii::$app->user->identity->id;        // Debe mostrar "1"
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => ['class' => 'table table-hover'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'username',
             'password',

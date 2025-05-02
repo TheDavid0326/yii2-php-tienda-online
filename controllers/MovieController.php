@@ -16,6 +16,8 @@ use yii\web\UploadedFile;
  */
 class MovieController extends Controller
 {
+    public $layout = 'admin';
+
     /**
      * @inheritDoc
      */
@@ -52,6 +54,11 @@ class MovieController extends Controller
 
     public function actionGallery() {
         
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->username !== 'admin') {
+            $this->layout = 'main';
+        }
+        
+
         $searchModel = new MovieSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 

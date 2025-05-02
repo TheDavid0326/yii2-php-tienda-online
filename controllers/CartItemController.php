@@ -17,6 +17,7 @@ use Yii;
  */
 class CartItemController extends Controller
 {
+    public $layout = 'admin';
     /**
      * @inheritDoc
      */

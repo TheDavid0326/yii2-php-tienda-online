@@ -24,6 +24,7 @@ class m250407_114204_create_users_table extends Migration
             [1, 'David0326', '123456', 'test100key', '100-token'],
             [2, 'Blanky', '123456', 'test101key', '101-token'],
             [3, 'admin', 'admin', 'testadminkey', 'admin-token'],
+            [4, 'user', 'user', 'test102key', '102-token'],
         ]);
 
         // Índice único para usernames

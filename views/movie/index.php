@@ -17,7 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="movie-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-center mb-3 fw-bold text-primary"> <?= Html::encode($this->title)?></h1>
+    <hr class="border border-primary border-3 opacity-75">
 
     <p>
         <?= Html::a('Create Movie', ['create'], ['class' => 'btn btn-success']) ?>
@@ -47,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => ['class' => 'table table-hover'],
         'pager' => [
             'options' => ['class' => 'pagination justify-content-center'],
             'linkContainerOptions' => ['class' => 'page-item mx-1'],
@@ -54,8 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'disabledListItemSubTagOptions' => ['class' => 'page-link', 'tag' => 'a']
         ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'description:ntext',

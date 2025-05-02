@@ -19,6 +19,8 @@ use Yii;
  */
 class CartController extends Controller
 {
+    public $layout = 'admin';
+
     /**
      * @inheritDoc
      */
@@ -185,6 +187,11 @@ class CartController extends Controller
     }
 
     public function actionMyCart(){
+
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->username !== 'admin') {
+            $this->layout = 'main';
+        }
+
         $cart = Cart::find()
         ->where(['user_id' => Yii::$app->user->id, 'status' => 'active'])
         ->with('cartItems')
@@ -216,6 +223,9 @@ class CartController extends Controller
     }
 
     public function actionCheckout() {
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->username !== 'admin') {
+            $this->layout = 'main';
+        }
         // Establecer la URL de retorno
         $returnUrl = Url::to(['cart/success'], true);
         
@@ -259,6 +269,10 @@ class CartController extends Controller
     }
 
     public function actionSuccess() {
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->username !== 'admin') {
+            $this->layout = 'main';
+        }
+        
         $cart = Cart::find()->where([
             'user_id' => Yii::$app->user->id,
             'status' => 'active'
