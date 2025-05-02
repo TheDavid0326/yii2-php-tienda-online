@@ -112,7 +112,7 @@ public function actionCheckout()
 
 <h1 align="center">Stripe Elements</h1>
 <p align="center">
-  <img src="https://i.imgur.com/YPJCh3w.png" height="400">
+  <img src="https://i.imgur.com/YPJCh3w.png" height="600">
 </p>
 
 ### 🧑‍💼 Panel de Administración
