@@ -8,6 +8,12 @@ Plataforma completa de venta de películas con panel de administración, carrito
     <br>
 </p>
 
+<h1 align="center">Galería</h1>
+<p align="center">
+    <img src="https://i.imgur.com/OtIcvF8.png" height="400px">
+    <br>
+</p>
+
 ## Características principales
 
 - 🎬 **Catálogo de películas**
@@ -85,7 +91,10 @@ Plataforma completa de venta de películas con panel de administración, carrito
 - Actualización de cantidad y contenido en tiempo real
 - Proceso de pago seguro con Stripe
 
----
+<h1 align="center">Vista de sesión iniciada</h1>
+<p align="center">
+  <img src="https://i.imgur.com/Mu3MCTw.png" height="250">
+</p>
 
 ### 💳 Integración con Stripe
 
@@ -101,11 +110,30 @@ public function actionCheckout()
 }
 ```
 
+<h1 align="center">Lista de libros privada</h1>
+<p align="center">
+  <img src="https://i.imgur.com/YPJCh3w.png" height="400">
+</p>
+
 ### 🧑‍💼 Panel de Administración
 
 - Desarrollado con **AdminLTE 4**
 - Diseño responsive
 - Control de acceso basado en roles (RBAC)
+
+<p align="center">
+  <img src="https://i.imgur.com/vfnL1Ch.png" height="400">
+</p>
+
+## Capturas de Pantalla
+
+
+
+
+
+
+
+
 
 ### Licencia
 
