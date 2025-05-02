@@ -91,7 +91,7 @@ Plataforma completa de venta de películas con panel de administración, carrito
 - Actualización de cantidad y contenido en tiempo real
 - Proceso de pago seguro con Stripe
 
-<h1 align="center">Vista de sesión iniciada</h1>
+<h1 align="center">Mi carrito</h1>
 <p align="center">
   <img src="https://i.imgur.com/Mu3MCTw.png" height="250">
 </p>
@@ -110,7 +110,7 @@ public function actionCheckout()
 }
 ```
 
-<h1 align="center">Lista de libros privada</h1>
+<h1 align="center">Stripe Elements</h1>
 <p align="center">
   <img src="https://i.imgur.com/YPJCh3w.png" height="400">
 </p>
@@ -124,16 +124,6 @@ public function actionCheckout()
 <p align="center">
   <img src="https://i.imgur.com/vfnL1Ch.png" height="400">
 </p>
-
-## Capturas de Pantalla
-
-
-
-
-
-
-
-
 
 ### Licencia
 
