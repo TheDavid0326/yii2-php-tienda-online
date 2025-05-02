@@ -93,7 +93,7 @@ Plataforma completa de venta de películas con panel de administración, carrito
 
 <h1 align="center">Mi carrito</h1>
 <p align="center">
-  <img src="https://i.imgur.com/Mu3MCTw.png" height="250">
+  <img src="https://i.imgur.com/Mu3MCTw.png" height="400">
 </p>
 
 ### 💳 Integración con Stripe
