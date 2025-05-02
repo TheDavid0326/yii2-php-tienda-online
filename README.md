@@ -53,6 +53,7 @@ Plataforma completa de venta de películas con panel de administración, carrito
    yii migrate
    ```
 ## Estructura del proyecto
+```
 .
 ├── config/ # Archivos de configuración de Yii2
 ├── controllers/ # Controladores de la aplicación
@@ -67,7 +68,7 @@ Plataforma completa de venta de películas con panel de administración, carrito
 │ └── main.php # Layout para el frontend
 └── web/ # Assets accesibles públicamente
 └── dist/ # Assets compilados de AdminLTE
-
+```
 ## 🔧 Componentes principales
 
 ### 🛒 Carrito
