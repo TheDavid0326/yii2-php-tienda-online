@@ -103,4 +103,6 @@ public function actionCheckout()
 - Diseño responsive
 - Control de acceso basado en roles (RBAC)
 
-  
+### Licencia
+
+Este proyecto está licenciado bajo la [Licencia MIT](https://opensource.org/licenses/MIT).
