@@ -33,7 +33,7 @@ tests/_support/_generated
 /.vagrant
 
 /runtime
-/web/assets
+/public_html/assets
 
 /db/backup_manual
 
