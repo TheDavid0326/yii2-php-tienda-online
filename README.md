@@ -14,6 +14,9 @@ Plataforma completa de venta de películas con panel de administración, carrito
     <br>
 </p>
 
+## Demostración
+[Demostración en vivo](https://dimgrey-ape-935685.hostingersite.com/index.html)
+
 ## Características principales
 
 - 🎬 **Catálogo de películas**
